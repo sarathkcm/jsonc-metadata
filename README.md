@@ -3,6 +3,8 @@ Extract field metadata from comments in JSONC files.
 
 JSONC is JSON with comments. This library helps in extracting metadata for each field from comments.
 
+>Depends on `jsonc-parser` library from microsoft for parsing jsonc.
+
 ### Usage
 ```js
 import { parse, yamlCommentParser }  from "jsonc-metadata";
