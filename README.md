@@ -31,7 +31,7 @@ const jsonc = `{
     */
 
 
-    const jsoncWithYalmComments = `{
+    const jsoncWithYamlComments = `{
         // message: this is name field
         "name": "JSONC",
 
@@ -43,7 +43,7 @@ const jsonc = `{
         ],
     }`;
 
-    const metadata2 = parse(jsonc); 
+    const metadata2 = parse(jsonc, yamlCommentParser); 
     
     /* 
         { 
