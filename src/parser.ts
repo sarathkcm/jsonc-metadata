@@ -6,7 +6,7 @@ export function parse(jsoncText: string, commentParser?: (lines: string[]) => an
 
     let offset = 0;
     let len = 0;
-    let metadata: any = {};
+    let metadata: any[] = [];
 
     function recursiveThroughTree(node: Node, names: string[] = []) {
 
@@ -25,7 +25,10 @@ export function parse(jsoncText: string, commentParser?: (lines: string[]) => an
             len = node.length;
             const name = [...names, node.children[0].value].join(".")
             if (name) {
-                metadata[name] = (commentParser || defaultParser)(comments);
+                const parsed = (commentParser || defaultParser)(comments);
+                if (parsed) {
+                    metadata.push({ path: name, metadata: parsed });
+                }
             }
             recursiveThroughTree(node.children[1], [...names, node.children[0].value])
         }

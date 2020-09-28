@@ -1,6 +1,6 @@
 {
   "name": "jsonc-metadata",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Extract field metadata from comments in JSONC files.",
   "main": "./dist/index.js",
   "scripts": {
