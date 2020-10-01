@@ -23,11 +23,16 @@ export function parse(jsoncText: string, commentParser?: (lines: string[]) => an
             }
             offset = node.offset;
             len = node.length;
-            const name = [...names, node.children[0].value].join(".")
+            const name = [...names, node.children[0].value]
             if (name) {
-                const parsed = (commentParser || defaultParser)(comments);
-                if (parsed) {
-                    metadata.push({ path: name, metadata: parsed });
+                try {
+                    const parsed = (commentParser || defaultParser)(comments);
+                    if (parsed) {
+                        metadata.push({ path: name, metadata: parsed });
+                    }
+                } catch (error) {
+                    throw new Error(`Error parsing metadata for path ${name.map(l=>`'${l}'`).join(".")}. Error: ${error}`);
+                    
                 }
             }
             recursiveThroughTree(node.children[1], [...names, node.children[0].value])
